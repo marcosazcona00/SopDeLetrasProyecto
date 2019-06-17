@@ -3,10 +3,10 @@ import os
 import sys
 import json
 import matriz
-import selector0
+import selector
 import muestra_reporte
 import PySimpleGUI as sg
-from metodos import *
+from metodos_auxiliares_main import *
 from menu import menu_opciones
 from ingreso import main_ingreso
 
