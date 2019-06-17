@@ -25,7 +25,7 @@ def main():
     dic_color_cantPalabras,orientacion,ayuda,mayus = menu_opciones()
 
     #Devuelve la lista de palabras que estarán en la matriz
-    listaPalabras,dicTipoPalabra=selector0.main_selector(dic_color_cantPalabras)  #recibe las listas de palabras y lista de palabras desordenadas
+    listaPalabras,dicTipoPalabra=selector.main_selector(dic_color_cantPalabras)  #recibe las listas de palabras y lista de palabras desordenadas
 
     #Defino los atributos de la matriz
     grilla = matriz.Matriz()
