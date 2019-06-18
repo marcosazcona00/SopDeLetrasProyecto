@@ -1,7 +1,7 @@
 #@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
 import json
 import random
-
+ 
 def seleccionar_palabras(cantidad,lista,listaTipo,i,dicTipoPalabra,color):
     for k in range(cantidad):
         j=random.randrange(0,len(listaTipo))
