@@ -1,6 +1,6 @@
 #@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
 import PySimpleGUI as sg
-from Buscador import Buscador
+from buscador import Buscador
 import json
 import sys
 import os
