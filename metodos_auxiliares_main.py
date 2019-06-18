@@ -9,10 +9,13 @@ def definir_tipo_ayuda(ayuda,listaPalabras,dic_color_cantPalabras):
             columna.append([sg.T(i + ' ' + dic_color_cantPalabras[i][1])])
     elif(ayuda == 'definiciones'):
         with open('definicion.json','r') as file:
-            dic = json.load(file)
-        for i in listaPalabras:
-            if(i in dic.keys()):
-                columna.append([sg.T(dic[i])])
+            try:
+                dic = json.load(file)
+                for i in listaPalabras:
+                    if(i in dic.keys()):
+                        columna.append([sg.T(dic[i])])
+            except json.decoder.JSONDecodeError:
+                sg.Popup('No hay definiciones disponibles')
     else:
         for i in listaPalabras:
             columna.append([sg.T(i)])

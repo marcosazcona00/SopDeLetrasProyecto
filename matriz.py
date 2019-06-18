@@ -24,11 +24,13 @@ class Matriz:
 
     def get_tamaño(self):
         self.__tam = self.__tamaño_mayor() + 4 #El tamaño de la palabra + 4 lugares más
-        if(len(self.__palabras) > 8): #Si la longitud de la palabra es mas de 8, el tamaño es el de la cantidad de palabras
-            self.__tamano_real = len(self.__palabras)
+        if(len(self.__palabras) < 8): #Si la longitud de la palabra es mas de 8, el tamaño es el de la cantidad de palabras
+            self.__tamano_real = (len(self.__palabras) + (8 - len(self.__palabras)))
+            #Si la longitud de palabras es menor a 8, el tamaño maximo va a ser 8, que se define
+            #como la cantidad de palabras que se tiene más lo que falta para llegar a 8
         else:
             #Sino, es la cantidad de palabras + 1
-            self.__tamano_real = len(self.__palabras) + 1
+            self.__tamano_real = len(self.__palabras)
         self.__altura = self.__tamano_real * 25
         self.__tamanio = self.__tam * 25
         return (self.__tamanio,self.__altura)

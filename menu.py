@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 import json
 import os
-
+import collections
 def devolver_cantidades_tipos():
     '''
         Devuelve la cantidad de palabras de cada tipo.
@@ -54,12 +54,46 @@ def verificar_datos(dic):
     '''
         Verifica que todos los campos esten llenos
     '''
-    print(dic)
+    ##Retorna True si todos están llenos
     ok = True
     for i in dic:
         if(dic[i] == ''):
             sg.Popup('Por favor llene todos los campos')
             ok = False
+            break
+    return ok
+
+def agregar_color(dic,lista):
+    lista.insert(0,dic['color_Verbos'])
+    lista.insert(1,dic['color_Sustantivos'])
+    lista.insert(2,dic['color_Adjetivos'])
+
+def verificar_color_repetido(lista):
+    #@author Azcona Marcos Susuki Fun
+    #Ejemplo
+    #[A,B,C]
+    #color = A
+    #listaN = [B,C].
+    #color = B
+    #listaN = [C]
+    #Sale porque no coincide con ok = false
+
+    ##[A,B,A]
+    ##color = A
+    ##listaN = [B,A]
+    ##color repetido, sale con ok = True porque coincidieron
+    listaTipos = ['Verbo','Sustantivo','Adjetivo']
+    ok = False #Si sale con false significa que no hubo colores repetidos
+    for i in range(len(lista)-1):
+        color = lista[i]
+        listaN =  lista[i+1:len(lista)]
+        for j in range(len(listaN)):
+            if(color == listaN[j]):
+                sg.Popup('Se repitio el color del tipo ',listaTipos[i], 'y', listaTipos[j+i+1])
+                ok = True #Se repitio
+                break
+        if(ok):
+            #Como no estamos seguros si el break corta con el primer for, lo verificamos acá si cortó por el ok = True
             break
     return ok
 
@@ -71,13 +105,18 @@ def menu_opciones():
         button,values=window.Read()
         if(button == 'Aceptar'):
             dic = values
-            if(verificar_datos(values) != False):
-                #Si todos los campos están llenos
-                break
+            if(verificar_datos(values)):
+                #Si todos los campos están lleno
+                lista = []
+                agregar_color(dic,lista)
+                #Agregamos los colores seleccionados
+                if(not verificar_color_repetido(lista)):
+                    #Si no hubo colores repetidos
+                    break
         elif(button == 'Cancelar')or(button == None):
             os._exit(1)
     window.Close()
-    dic_color_cantPalabras['Sustantivo'] = [dic['color_Sustantivos'],dic['cantidad_sustantivo']]
-    dic_color_cantPalabras['Adjetivo'] = [dic['color_Adjetivos'],dic['cantidad_adjetivo']]
-    dic_color_cantPalabras['Verbo'] = [dic['color_Verbos'],dic['cantidad_verbo']]
+    dic_color_cantPalabras['Sustantivo'] = [lista[0],dic['cantidad_sustantivo']]
+    dic_color_cantPalabras['Adjetivo'] = [lista[1],dic['cantidad_adjetivo']]
+    dic_color_cantPalabras['Verbo'] = [lista[2],dic['cantidad_verbo']]
     return (dic_color_cantPalabras,dic['orientacion'],dic['ayuda'],dic['letra'])

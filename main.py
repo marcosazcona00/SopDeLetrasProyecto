@@ -60,11 +60,15 @@ def main():
             columna = values['graph'][0] // 25
             fila = values['graph'][1] // 25
             print(values['combo'][0])
-            ok1=grilla.cambiar((fila,columna),graph,dic_color_cantPalabras[values['combo']][0])
-            if(orientacion == 'Horizontal'):
-                llenar_diccionario(ok1,color,aux,dicGeneral,fila,columna,values['combo'])
-            else:
-                llenar_diccionario(ok1,color,aux,dicGeneral,columna,fila,values['combo'])
+            try: #esto porque puede tocar un pixel que no corresponde
+                ok1=grilla.cambiar((fila,columna),graph,dic_color_cantPalabras[values['combo']][0])
+                if(orientacion == 'Horizontal'):
+                    llenar_diccionario(ok1,color,aux,dicGeneral,fila,columna,values['combo'])
+                else:
+                    llenar_diccionario(ok1,color,aux,dicGeneral,columna,fila,values['combo'])
+            except KeyError:
+                print('posicion fuera de rango')
+
     # sys.exit()
     os._exit(1)
 
