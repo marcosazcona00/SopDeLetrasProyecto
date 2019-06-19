@@ -69,7 +69,6 @@ def agregar_color(dic,lista):
     lista.insert(2,dic['color_Adjetivos'])
 
 def verificar_color_repetido(lista):
-    #@author Azcona Marcos Susuki Fun
     #Ejemplo
     #[A,B,C]
     #color = A

@@ -40,7 +40,7 @@ class Buscador:
         '''
         try:
             return self.__dic[tag(self.__palabra)[0][1]]
-        except IndexError:
+        except (IndexError,KeyError):
             return ' '
 
     def get_defincion(self):
@@ -77,13 +77,14 @@ class Buscador:
         if(tipoWikcionario != None):
             #SI existe en wikcionario
                 self.__tipo = tipoWikcionario
+                print('Valores: ',self.__dic.values())
                 if(tipoWikcionario != tipoPattern):
                     #Si wikcionario y pattern no coincidiero
-                    if(self.__tipo in self.__dic.values()): #Si son distintios pero el tipo Wikcionario es un Sustantivo Adjetivo o Verbo
-                        self.__razon = self.__obtener(self.__objeto_buscador.sections[3].string)
-                        self.__generar_reporte('definicion.json')
                     self.__razon = 'No coincidio con pattern'
                     self.__generar_reporte('reporte.json')
+                if(self.__tipo in self.__dic.values()): #Si son distintios pero el tipo Wikcionario es un Sustantivo Adjetivo o Verbo
+                    self.__razon = self.__obtener(self.__objeto_buscador.sections[3].string)
+                    self.__generar_reporte('definicion.json')    
 
         else:
             #No estaba en wikcionarios
