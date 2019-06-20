@@ -2,6 +2,7 @@
 import json
 import PySimpleGUI as sg
 import os
+
 def definir_tipo_ayuda(ayuda,listaPalabras,dic_color_cantPalabras):
     columna=[]
     if(ayuda == 'Ninguna'):
@@ -15,6 +16,7 @@ def definir_tipo_ayuda(ayuda,listaPalabras,dic_color_cantPalabras):
                     if(i in dic.keys()):
                         columna.append([sg.T(dic[i])])
             except json.decoder.JSONDecodeError:
+                #Si está vacío, significa que no hay definiciones disponibles.
                 sg.Popup('No hay definiciones disponibles')
     else:
         for i in listaPalabras:

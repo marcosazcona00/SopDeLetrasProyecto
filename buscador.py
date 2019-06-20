@@ -64,7 +64,7 @@ class Buscador:
         json.dump(dic,file)
         file.close()
 
-    def validacion(self,repetida):
+    def validacion(self,lista,dic):
         '''
             se asume que toda palabra que no este en wikcionario y patter retorna que es sustantivo, sera una palabra invalida
             Asumimos que si no es una palabra valida, pattern la devuelve como sustantivo
@@ -72,37 +72,39 @@ class Buscador:
         '''
         tipoWikcionario = self.__verficar_palabra_wikcionario()
         tipoPattern = self.__verificar_palabra_patterEs()
-        print('Wikcionario ',tipoWikcionario)
-        print('Pattern ',tipoPattern)
-        if(tipoWikcionario != None):
-            #SI existe en wikcionario
-                self.__tipo = tipoWikcionario
-                print('Valores: ',self.__dic.values())
-                if(tipoWikcionario != tipoPattern):
-                    #Si wikcionario y pattern no coincidiero
-                    self.__razon = 'No coincidio con pattern'
-                    self.__generar_reporte('reporte.json')
-                if(self.__tipo in self.__dic.values()): #Si son distintios pero el tipo Wikcionario es un Sustantivo Adjetivo o Verbo
-                    self.__razon = self.__obtener(self.__objeto_buscador.sections[3].string)
-                    self.__generar_reporte('definicion.json')    
-
-        else:
-            #No estaba en wikcionarios
-            if(tipoPattern != 'sustantivo'):
-                ##Si pattern me devuelve un tipo válido
-                self.__tipo = tipoPattern
-                if(not repetida):
+        if(self.__palabra not in lista):
+            #Si está reptida
+            if(tipoWikcionario != None):
+                #SI existe en wikcionario
+                    self.__tipo = tipoWikcionario
+                    if(self.__tipo in self.__dic.values()): #Si son distintios pero el tipo Wikcionario es un Sustantivo Adjetivo o Verbo
+                        self.__razon = self.__obtener(self.__objeto_buscador.sections[3].string)
+                        self.__generar_reporte('definicion.json')
+                    if(tipoWikcionario != tipoPattern):
+                        #Si wikcionario y pattern no coincidiero
+                        self.__razon = 'No coincidio con pattern'
+            else:
+                #No estaba en wikcionarios
+                if(tipoPattern != 'sustantivo'):
+                    ##Si pattern me devuelve un tipo válido
+                    self.__tipo = tipoPattern
                     self.__razon = sg.PopupGetText('Ingrese la defincion de la palabra ',self.__palabra)
                     self.__generar_reporte('definicion.json')
                     self.__razon='No estaba en wikcionario'
-                    self.__generar_reporte('reporte.json')
-            else:
-                #No estaba en patter ni wikcionario
-                self.__razon = 'No estaba en pattern ni wikcionario'
+                    #self.__generar_reporte('reporte.json')
+                else:
+                    #No estaba en patter ni wikcionario
+                    self.__razon = 'No estaba en pattern ni wikcionario'
+                    self.__tipo = None
                 self.__generar_reporte('reporte.json')
-                return None
-        return self.__tipo
-
+            return (self.__tipo,False)
+        else:
+            #Si está repetida, buscamos el tipo
+            for i in dic:
+                if(self.__palabra in dic[i]):
+                    self.__tipo = i #Me quedó con el tipo de la Palabra
+                    break
+            return self.__tipo,True
 
     def __separar_defincion(self,definicion):
         '''

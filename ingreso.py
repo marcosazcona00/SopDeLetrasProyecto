@@ -6,28 +6,58 @@ import sys
 import os
 
 def mostrar_palabras_ya_existentes(dic):
+    '''
+        Retorna una lista de las palabras que ya habian sido cargadas
+    '''
     lista = []
     for i in dic:
         for j in dic[i]:
             lista.append(j)
     return lista
 
+def eliminar_palabra(palabra,archivo):
+    '''
+        elimina la palabra del archivo
+    '''
+    def buscar_palabra(palabra,dic):
+        if(palabra in dic.keys()):
+            return True
+        else:
+            return False
+    print('estaaa')
+    try:
+        print('Entre')
+        file = open(archivo,'r')
+        dic = json.load(file)
+        file.close()
+        print('LLAVES: ',dic.keys())
+        if(buscar_palabra(palabra,dic)):
+            del dic[palabra]
+            file = open(archivo,'w')
+            json.dump(dic,file)
+            file.close()
+    except json.JSONDecodeError:
+        print('Archivo Vacio')
+
 def main_ingreso():
     '''
     Pide al profesor el ingreso de las palabras y escribe en reporte las palabras que no coincidieron
-    Pide que ingrese colores y cantidades para los tipos
     '''
 
     def verificar():
+        '''
+            Verifica si quiere o no ingresar nuevas palabras.
+            La primer vez que se ejecute se pedirán palabras obligatoriamente
+        '''
         aux = False
         dic = {"Verbo": [], "Sustantivo": [], "Adjetivo": []}
-        file= None
+        file = None
         if (os.stat('tipos.json').st_size == 0):
             #Si el archivo está vacio, lo creo y agrego palabras
             file = open('tipos.json','w',encoding = 'utf-8')
             aux = True
         else:
-            ok = sg.PopupYesNo('¿ Desea agregar nuevas palabras para jugar ?')
+            ok = sg.PopupYesNo('¿ Desea agregar nuevas palabras para jugar o eliminar alguna palabra cargada ?')
             #Si no está vacio pregunto si quiere agregar nuevas
             if(ok == 'Yes'):
                 #Si desea agregar,abrimos el archivo como lectura escritura
@@ -53,35 +83,35 @@ def main_ingreso():
             try:
                 palabra = values['palabra_elegida']
                 if(button == 'Aceptar'):
-                    if(palabra in lista):
-                        repetida = True
-                    window.FindElement('palabra_elegida').Update('')
-                    searcher = Buscador(palabra)
-                    tipo = searcher.validacion(repetida)
-                    if(tipo != None):
-                        #Si está en wikcionario
-                        tipo = tipo.capitalize() #Ponemos la primer letra mayuscula pues el diccionario sus claves tiene la primer letra Mayuscula
-                        if(tipo in lAux):
-                          #Si estaba en el diccionario el tipo
-                            if(palabra not in dic[tipo]):
-                                #Si la palabra no está en el tipo, la agrego
-                                dic[tipo].append(palabra)
-                                lista.append(palabra)
+                    if(palabra != ''):
+                        window.FindElement('palabra_elegida').Update('')
+                        searcher = Buscador(palabra)
+                        (tipo,repetida) = searcher.validacion(lista,dic)
+                        if(tipo != None):
+                            #Si está en wikcionario
+                            tipo = tipo.capitalize() #Ponemos la primer letra mayuscula pues el diccionario sus claves tiene la primer letra Mayuscula
+                            if(tipo in lAux):
+                              #Si estaba en la lista de tipos
+                                if(palabra not in dic[tipo]):
+                                    #Si la palabra no está en el tipo, la agrego
+                                    dic[tipo].append(palabra)
+                                    lista.append(palabra)
                             else:
-                                #En caso de ya existir, aviso que existe
-                                sg.Popup('Palabra ya existente')
-                                ok = sg.PopupYesNo('¿ Desea eliminar la palabra {} ?'.format(palabra))
-                                #Si no está vacio pregunto si quiere agregar nuevas
-                                if(ok == 'Yes'):
-                                    dic[tipo].remove(palabra)
-                                    lista.remove(palabra)
-                            window.FindElement('palabras_ingresadas').Update(values = lista)
+                                sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
                         else:
                             sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
-                    else:
-                        sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
+                        #Si retorno None, puede pasar que haya sido la primera vez y quiera borrar
+                        if(repetida):
+                            sg.Popup('Palabra ya existente')
+                            ok = sg.PopupYesNo('¿ Desea eliminar la palabra {} ?'.format(palabra))
+                            if(ok == 'Yes'):
+                                dic[tipo].remove(palabra)
+                                lista.remove(palabra)
+                                eliminar_palabra(palabra,'definicion.json')
+                                eliminar_palabra(palabra,'reporte.json')
+                        window.FindElement('palabras_ingresadas').Update(values = lista) #Actualizamos el listbox de las palabras ya ingresadas
                 elif(button == 'Finalizar'):
-                    file = open('tipos.json','w') #Lo abro de nuevo porque si hubo remove se rompe ya que un elemento se fue, pero escribe lo nuevo, lo anterior lo deja como estaba
+                    file = open('tipos.json','w') #Lo abro de nuevo porque si hubo remove falla ya que un elemento se fue, pero escribe lo nuevo, lo anterior lo deja como estaba
                     json.dump(dic,file)
                     file.close()
                     window.Close()
@@ -91,14 +121,13 @@ def main_ingreso():
             except TypeError:
                 break
 
-
-
+    #---main_ingreso---#
     aux,dic,file = verificar()
     if(aux):   #solo se ejecutara si se desea agregar mas palabras o si no habia palabras cargadas
         file.close() #Cierro el archivo aca
-        lista = mostrar_palabras_ya_existentes(dic)
-        print(lista)
-        layout=[[sg.T('Ingrese sus palabras',key = 'text')],
+        lista = mostrar_palabras_ya_existentes(dic) #Mostramos las palabras existentes en el listbox
+        layout=[
+            [sg.T('Ingrese sus palabras',key = 'text')],
             [sg.InputText('',key = 'palabra_elegida'),sg.Submit('Aceptar')],
             [sg.T('Palabras ya ingresadas: ')],
             [sg.Listbox(lista,size=(20,30),key='palabras_ingresadas')],

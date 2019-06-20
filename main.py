@@ -6,24 +6,44 @@ import matriz
 import selector
 import muestra_reporte
 import PySimpleGUI as sg
-from metodos_auxiliares_main import *
 from menu import menu_opciones
 from ingreso import main_ingreso
+from metodos_auxiliares_main import *
 
+
+def sin_contenido_tipos():
+    '''
+        Verifica si el profesor ingreso o no palabras
+    '''
+    file = open('tipos.json')
+    dic = json.load(file)
+    cant = 0
+    for i in dic:
+        if(dic[i] == []):
+            cant+=1
+    return (cant == 3)
+    #Si retorna que cant == 3 significa que había 3 listas vacias de tipos.
+    #Lo que quiere decir que no se cargaron datos en los tipos
+
+def pedir_palabras_profesor():
+    main_ingreso()
+    while(sin_contenido_tipos()):
+        sg.Popup('No se ingresaron palabras')
+        main_ingreso()
 
 def main():
     '''
         JUGABLE
     '''
     ##Menu que pide si quiere o no nuevas palabras
-    main_ingreso()
+    pedir_palabras_profesor()
 
     #Muestra al profesor el reporte de palabras que generaron problemas
     muestra_reporte.mostrar_reporte()
 
     #Menu de opciones
-    dic_color_cantPalabras,orientacion,ayuda,mayus = menu_opciones()
 
+    dic_color_cantPalabras,orientacion,ayuda,mayus = menu_opciones()
     #Devuelve la lista de palabras que estarán en la matriz
     listaPalabras,dicTipoPalabra=selector.main_selector(dic_color_cantPalabras)  #recibe las listas de palabras y lista de palabras desordenadas
 

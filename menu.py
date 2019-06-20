@@ -64,11 +64,17 @@ def verificar_datos(dic):
     return ok
 
 def agregar_color(dic,lista):
+    '''
+        Agrega los colores elegidos.
+    '''
     lista.insert(0,dic['color_Verbos'])
     lista.insert(1,dic['color_Sustantivos'])
     lista.insert(2,dic['color_Adjetivos'])
 
 def verificar_color_repetido(lista):
+    '''
+        Verifica si hubo o no repiticones de colores
+    '''
     #Ejemplo
     #[A,B,C]
     #color = A
@@ -97,6 +103,16 @@ def verificar_color_repetido(lista):
     return ok
 
 def menu_opciones():
+    def verificar_cantidades(dic):
+        print(dic)
+        if((dic['cantidad_sustantivo'] == '0')and(dic['cantidad_adjetivo'] == '0')and(dic['cantidad_verbo'] == '0')):
+            sg.Popup('Elija por lo menos una palabra para un tipo')
+            return False
+        else:
+            return True
+    '''
+        Menu de Opciones
+    '''
     layout = generar_layout()
     window=sg.Window('ventana').Layout(layout)
     dic_color_cantPalabras = {'Sustantivo': [],'Adjetivo':[],'Verbo':[]}
@@ -109,7 +125,7 @@ def menu_opciones():
                 lista = []
                 agregar_color(dic,lista)
                 #Agregamos los colores seleccionados
-                if(not verificar_color_repetido(lista)):
+                if(not verificar_color_repetido(lista) and (verificar_cantidades(dic))):
                     #Si no hubo colores repetidos
                     break
         elif(button == 'Cancelar')or(button == None):

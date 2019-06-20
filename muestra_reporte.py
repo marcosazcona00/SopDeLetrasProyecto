@@ -7,18 +7,19 @@ def mostrar_reporte():
     '''
         Muestra el reporte en pantalla
     '''
-
-    fuente,dic = pedir_fuente()
-    layout = []
-
-    for i in dic:
-        layout.append([sg.T(i.upper() + ': ' + dic[i],font = fuente)])
-    window = sg.Window('Reporte').Layout(layout)
-    event = window.Read()
-
-    if(event == None):
-        window.Close()
-        os._exit(1)
+    try:
+        fuente,dic = pedir_fuente()
+        layout = []
+        for i in dic:
+            layout.append([sg.T(i.upper() + ': ' + dic[i],font = fuente)])
+        window = sg.Window('Reporte').Layout(layout)
+        event = window.Read()
+        if(event == None):
+            window.Close()
+            os._exit(1)
+    except (TypeError,ValueError):
+        #levanta ValueError si eliminé y quedó el archivo con {}
+        print(" ")
 
 def pedir_fuente():
     '''
@@ -43,9 +44,9 @@ def pedir_fuente():
         dic = json.load(file)
     except json.decoder.JSONDecodeError:
         #SI el Json estaba vacio
-        sg.Popup('Archivo reporte.json Vacio')
         window.Close()
-        os._exit(1)
+        sg.Popup('Archivo reporte ".json" Vacio. No habra reporte para mostrar')
+        return None
     else:
         window.Close()
         return (values['fuente'],dic)
