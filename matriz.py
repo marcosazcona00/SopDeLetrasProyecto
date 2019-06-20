@@ -80,7 +80,6 @@ class Matriz:
 
     def __crear_grilla_horizontal(self,graph,mayus):
         matriz = self.__distribuir_palabras()
-        print(matriz)
         '''
          Distribuye las palabras por la grilla. METODO PRIVADO
         '''
@@ -110,7 +109,6 @@ class Matriz:
 
     def __crear_grilla_vertical(self,graph,mayus):
         matriz = self.__distribuir_palabras()
-        print(matriz)
         '''
          Distribuye las palabras por la grilla. METODO PRIVADO
         '''

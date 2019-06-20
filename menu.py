@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 import json
 import os
 import collections
+
 def devolver_cantidades_tipos():
     '''
         Devuelve la cantidad de palabras de cada tipo.

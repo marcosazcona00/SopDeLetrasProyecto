@@ -24,13 +24,10 @@ def eliminar_palabra(palabra,archivo):
             return True
         else:
             return False
-    print('estaaa')
     try:
-        print('Entre')
         file = open(archivo,'r')
         dic = json.load(file)
         file.close()
-        print('LLAVES: ',dic.keys())
         if(buscar_palabra(palabra,dic)):
             del dic[palabra]
             file = open(archivo,'w')

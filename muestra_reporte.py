@@ -18,7 +18,7 @@ def mostrar_reporte():
             window.Close()
             os._exit(1)
     except (TypeError,ValueError):
-        #levanta ValueError si eliminé y quedó el archivo con {}
+        #levanta ValueError si eliminé una palabra y quedó el archivo con {}
         print(" ")
 
 def pedir_fuente():

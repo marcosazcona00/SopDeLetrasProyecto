@@ -82,7 +82,6 @@ def main():
             #aux = 0 #Aux va aca adentro inicializado porque no cambia
             columna = values['graph'][0] // 25
             fila = values['graph'][1] // 25
-            print(values['combo'][0])
             try: #esto porque puede tocar un pixel que no corresponde
                 ok1=grilla.cambiar((fila,columna),graph,dic_color_cantPalabras[values['combo']][0])
                 if(orientacion == 'Horizontal'):
