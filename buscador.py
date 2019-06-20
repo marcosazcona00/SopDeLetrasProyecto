@@ -122,6 +122,7 @@ class Buscador:
         '''
             Obtiene una unica definicion
         '''
+        palabra = ''
         definicion = str(definicion).split('\n')
         #La defincion la creo como una lista separada por renglones
         for n in range(0,len(definicion)):
