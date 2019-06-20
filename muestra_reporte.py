@@ -49,4 +49,5 @@ def pedir_fuente():
         return None
     else:
         window.Close()
+        file.close()
         return (values['fuente'],dic)
