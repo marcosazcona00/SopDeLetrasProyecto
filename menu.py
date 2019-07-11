@@ -1,8 +1,10 @@
 #@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
-import PySimpleGUI as sg
-import json
 import os
+import json
 import collections
+import PySimpleGUI as sg
+
+# ---------  MODULOS  ---------------- #
 def devolver_cantidades_tipos():
     '''
         Devuelve la cantidad de palabras de cada tipo.
@@ -16,7 +18,7 @@ def devolver_cantidades_tipos():
             #Si la cantidad de palabras que tiene el diccionario son menos de 6, mostrar las que tiene + 1
             cantidad.append(len(dic[i])+1)
         else:
-            #Sino. como maximo mostrar para elegir 7
+            #Sino. como maximo mostrar para elegir 6
             cantidad.append(7)
     return cantidad
 
@@ -40,11 +42,11 @@ def generar_layout():
               [sg.T('Color para representarlo ',background_color='#dbdbdb'),sg.ColorChooserButton('Elegir color',key='color_Adjetivos')]
              ]
     orientacion=['Horizontal','vertical']
-    ayuda=['Ninguna','definiciones','Lista de palabras']
+    ayuda=['Cantidad Tipos','Definiciones','Lista de palabras']
     letra=['Mayuscula','Minuscula']
     layout=[[sg.T('Menu de opciones')],
             [sg.Column(columna1, background_color='#dbdbdb'), sg.Column(columna2,background_color='#dbdbdb',key='columna2'),sg.Column(columna3,background_color='#dbdbdb')],
-            [sg.T('    Seleccione la orientacion'),sg.InputCombo(orientacion,key='orientacion',size=(20,20)),sg.T('Seleccione el tipo de ayuda'),sg.InputCombo(ayuda,key='ayuda')],
+            [sg.T('    Seleccione la orientacion'),sg.InputCombo(orientacion,key='orientacion',size=(20,20))],
             [sg.T('    seleccione como desea que aparezcan las letras'),sg.InputCombo(letra,key='letra')],
             [sg.Submit('Aceptar'),sg.Submit('Cancelar')]
             ]
@@ -64,12 +66,17 @@ def verificar_datos(dic):
     return ok
 
 def agregar_color(dic,lista):
-    lista.insert(0,dic['color_Verbos'])
-    lista.insert(1,dic['color_Sustantivos'])
-    lista.insert(2,dic['color_Adjetivos'])
+    '''
+        Agrega los colores elegidos.
+    '''
+    lista.insert(2,dic['color_Verbos'])
+    lista.insert(0,dic['color_Sustantivos'])
+    lista.insert(1,dic['color_Adjetivos'])
 
 def verificar_color_repetido(lista):
-    #@author Azcona Marcos Susuki Fun
+    '''
+        Verifica si hubo o no repiticones de colores
+    '''
     #Ejemplo
     #[A,B,C]
     #color = A
@@ -97,7 +104,17 @@ def verificar_color_repetido(lista):
             break
     return ok
 
+def verificar_cantidades(dic):
+    if((dic['cantidad_sustantivo'] == '0')and(dic['cantidad_adjetivo'] == '0')and(dic['cantidad_verbo'] == '0')):
+        sg.Popup('Elija por lo menos una palabra para un tipo')
+        return False
+    else:
+        return True
+
 def menu_opciones():
+    '''
+        Menu de Opciones
+    '''
     layout = generar_layout()
     window=sg.Window('ventana').Layout(layout)
     dic_color_cantPalabras = {'Sustantivo': [],'Adjetivo':[],'Verbo':[]}
@@ -110,7 +127,7 @@ def menu_opciones():
                 lista = []
                 agregar_color(dic,lista)
                 #Agregamos los colores seleccionados
-                if(not verificar_color_repetido(lista)):
+                if(not verificar_color_repetido(lista) and (verificar_cantidades(dic))):
                     #Si no hubo colores repetidos
                     break
         elif(button == 'Cancelar')or(button == None):
@@ -119,4 +136,4 @@ def menu_opciones():
     dic_color_cantPalabras['Sustantivo'] = [lista[0],dic['cantidad_sustantivo']]
     dic_color_cantPalabras['Adjetivo'] = [lista[1],dic['cantidad_adjetivo']]
     dic_color_cantPalabras['Verbo'] = [lista[2],dic['cantidad_verbo']]
-    return (dic_color_cantPalabras,dic['orientacion'],dic['ayuda'],dic['letra'])
+    return (dic_color_cantPalabras,dic['orientacion'],dic['letra'])
