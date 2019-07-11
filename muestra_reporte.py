@@ -1,7 +1,7 @@
 #@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
-import PySimpleGUI as sg
-import json
 import os
+import json
+import PySimpleGUI as sg
 
 def mostrar_reporte():
     '''
@@ -21,9 +21,10 @@ def mostrar_reporte():
         #levanta ValueError si eliminé y quedó el archivo con {}
         print(" ")
 
-def pedir_fuente():
+
+def ventana_elegir_fuente():
     '''
-        Pide al profesor la fuente con la que quiere mostrar el reporte
+        Muestra una ventana con las fuentes a elegir si el archivo reporte.json no estaba vacio
     '''
     layout = [
         [sg.T('Elija la funete con la quiere que se presente el reporte')],
@@ -34,19 +35,23 @@ def pedir_fuente():
     event,values = window.Read()
 
     if(event == 'Enviar'):
-        print('enviado')
-    else:
         window.Close()
+        return values['fuente']
+    else:
         os._exit(1)
 
+
+def pedir_fuente():
+    '''
+        Pide al profesor la fuente con la que quiere mostrar el reporte
+    '''
     file = open('reporte.json')
     try:
         dic = json.load(file)
     except json.decoder.JSONDecodeError:
-        #SI el Json estaba vacio
-        window.Close()
+        #Excepcion en caso de que el archivo se encuentre vacío
         sg.Popup('Archivo reporte ".json" Vacio. No habra reporte para mostrar')
         return None
     else:
-        window.Close()
-        return (values['fuente'],dic)
+        fuente = ventana_elegir_fuente()
+        return (fuente,dic)

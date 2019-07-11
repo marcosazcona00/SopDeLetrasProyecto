@@ -4,9 +4,8 @@ from celda import Celda
 
 class Matriz:
     def __init__(self):
-        self.__tamanio= None;
-        self.__altura = None;
-        self.__window = None
+        self.__tamanio= None
+        self.__altura = None
         self.__tam = 0
         self.__palabras = []
         self.__tamano_real = 0
@@ -14,7 +13,7 @@ class Matriz:
 
     def __tamaño_mayor(self):
         '''
-            Me devuelve la longitud de la palabra mas larga para ajustar la matriz
+            Devuelve la longitud de la palabra mas larga para ajustar la matriz
         '''
         alto=0
         for i in self.__palabras:
@@ -23,15 +22,15 @@ class Matriz:
         return alto
 
     def get_tamaño(self):
+        '''
+            Devuelve el tamaño real de la grilla, de N * N
+        '''
         self.__tam = self.__tamaño_mayor() + 4 #El tamaño de la palabra + 4 lugares más
         if(len(self.__palabras) < 8): #Si la longitud de la palabra es mas de 8, el tamaño es el de la cantidad de palabras
-            self.__tamano_real = (len(self.__palabras) + (8 - len(self.__palabras)))
-            #Si la longitud de palabras es menor a 8, el tamaño maximo va a ser 8, que se define
-            #como la cantidad de palabras que se tiene más lo que falta para llegar a 8
+            self.__tamano_real = (len(self.__palabras) + (8 - len(self.__palabras)))  #Si la longitud de palabras es menor a 8, el tamaño maximo va a ser 8, que se define
         else:
-            #Sino, es la cantidad de palabras + 1
             self.__tamano_real = len(self.__palabras)
-        self.__altura = self.__tamano_real * 25
+        self.__altura = self.__tamano_real * 25;
         self.__tamanio = self.__tam * 25
         return (self.__tamanio,self.__altura)
 
@@ -42,10 +41,11 @@ class Matriz:
         '''
             Elige una fila/columna donde puede ubicarse
         '''
-        filasElegir = random.randint(0,self.__tamano_real-1)#La fila es entre 0 y el tamanño real definido previamente pero -1
+        filasElegir = random.randint(0,self.__tamano_real-1) #La fila es entre 0 y el tamanño real definido previamente pero -1
         while(filasElegir in filas_elegidas):
             filasElegir = random.randint(0,self.__tamano_real-1)
         filas_elegidas.append(filasElegir)
+
         return filasElegir
 
     def __distribuir_palabras(self):
@@ -61,29 +61,26 @@ class Matriz:
         for fila in range(len(self.__palabras)):
             filasElegir = self.__elegir_fila(filas_elegidas)
             columna = random.randint(0,self.__tam - len(self.__palabras[fila]))
-            for j in range(0,(columna)):
-                #este for completa con palabras al azar hasta la primera posicion donde arranca la palabra que corresponde
+            for j in range(0,(columna)): #este for completa con palabras al azar hasta la primera posicion donde arranca la palabra que corresponde
                 letra_azar = chr(random.randint(97,122))
                 matriz[filasElegir].append(letra_azar)
-            for j in range(0,len(self.__palabras[fila])):
-                #esto for ingresa las letras de la palabra la ual estamos analizando en i
+            for j in range(0,len(self.__palabras[fila])): #este for ingresa las letras de la palabra la ual estamos analizando en i
                 matriz[filasElegir].append(self.__palabras[fila][j])
-            for j in range((columna + len(self.__palabras[fila])),self.__tam):
-                #Desde la ultima posicion en que está la ultima letra de la palabra + 1 completa con letras al azar hasta el tamaño de la grilla
+            for j in range((columna + len(self.__palabras[fila])),self.__tam): #Desde la ultima posicion en que está la ultima letra de la palabra + 1 completa con letras al azar hasta el tamaño de la grilla
                 letra_azar = chr(random.randint(97,122))
                 matriz[filasElegir].append(letra_azar)
-        for fila in range(len(self.__palabras),(self.__tamano_real)):##LLENA LAS FILAS QUE QUEDARON DE LA MATRIZ
+        for fila in range(len(self.__palabras),(self.__tamano_real)):##Llena las filas que quedaron de las matriz con letras al azar
             filasElegir = self.__elegir_fila(filas_elegidas)
             for i in range(self.__tam):
                 matriz[filasElegir].append(chr(random.randint(97,122)))
         return matriz
 
     def __crear_grilla_horizontal(self,graph,mayus):
+        '''
+        Distribuye las palabras por la grilla. METODO PRIVADO
+        '''
+
         matriz = self.__distribuir_palabras()
-        print(matriz)
-        '''
-         Distribuye las palabras por la grilla. METODO PRIVADO
-        '''
         dic = dict()
         dicAux = dict()
         y1 = 0
@@ -109,8 +106,8 @@ class Matriz:
             y2+=25
 
     def __crear_grilla_vertical(self,graph,mayus):
+
         matriz = self.__distribuir_palabras()
-        print(matriz)
         '''
          Distribuye las palabras por la grilla. METODO PRIVADO
         '''
@@ -137,19 +134,22 @@ class Matriz:
             _x1+=25
             x2+=25
 
+
     def mostrar_matriz_vertical(self,graph,mayus):
         '''
             MUESTRA LA GRILLA POR PANTALLA VERTICALMENTE
         '''
         self.__crear_grilla_vertical(graph,mayus)
         return self.__dic
-        ##Actualiza la pantalla
+
+
     def mostrar_matriz_horizontal(self,graph,mayus):
         '''
             MUESTRA LA GRILLA POR PANTALLA VERTICALMENTE
         '''
         self.__crear_grilla_horizontal(graph,mayus)
         return self.__dic
+
 
     def cambiar(self,pos,graph,color = 'red'):
         celda = self.__dic[(pos[0],pos[1])]

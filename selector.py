@@ -1,7 +1,7 @@
 #@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
 import json
 import random
- 
+
 def seleccionar_palabras(cantidad,lista,listaTipo,i,dicTipoPalabra,color):
     for k in range(cantidad):
         j=random.randrange(0,len(listaTipo))
@@ -26,6 +26,5 @@ def main_selector(dic):
         #i es el tipo: Sustantivo,adjetivo,verbo
         color = dic[i][0]
         dicPalabrasColor[color] = []
-        print('Archivo[i]',archivo[i])
         seleccionar_palabras(int(dic[i][1]),listaPalabrasElegidas,archivo[i],i,dicPalabrasColor,color)
     return (listaPalabrasElegidas,dicPalabrasColor)

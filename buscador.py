@@ -50,7 +50,6 @@ class Buscador:
         '''
             Metodo que genera el reporte de la palabra
         '''
-        print('entre')
         if os.stat(archivo).st_size != 0:
             file = open(archivo,'r')
             dic = json.load(file)
@@ -59,7 +58,6 @@ class Buscador:
         else:
             dic=dict()
         file = open(archivo,'w')
-        print('Razon',self.__razon)
         dic[self.__palabra] = self.__razon
         json.dump(dic,file)
         file.close()
@@ -122,6 +120,7 @@ class Buscador:
         '''
             Obtiene una unica definicion
         '''
+        palabra = ''
         definicion = str(definicion).split('\n')
         #La defincion la creo como una lista separada por renglones
         for n in range(0,len(definicion)):
