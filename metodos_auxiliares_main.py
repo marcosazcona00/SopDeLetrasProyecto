@@ -3,11 +3,17 @@ import os
 import json
 import time
 import PySimpleGUI as sg
+<<<<<<< HEAD
 
 def columna_ayudas(ayuda,listaPalabras,dic_color_cantPalabras):
     '''
         Devuelve la columna con la ayuda elegida
     '''
+=======
+import os
+
+def definir_tipo_ayuda(ayuda,listaPalabras,dic_color_cantPalabras):
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
     columna=[]
     if(ayuda == 'Cantidad Tipos'):
         for i in dic_color_cantPalabras:

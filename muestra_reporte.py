@@ -18,9 +18,14 @@ def mostrar_reporte():
             window.Close()
             os._exit(1)
     except (TypeError,ValueError):
+<<<<<<< HEAD
         #levanta ValueError si eliminé y quedó el archivo con {}
         print(" ")
 
+=======
+        #levanta ValueError si eliminé una palabra y quedó el archivo con {}
+        print(" ")
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 
 def ventana_elegir_fuente():
     '''
@@ -49,9 +54,20 @@ def pedir_fuente():
     try:
         dic = json.load(file)
     except json.decoder.JSONDecodeError:
+<<<<<<< HEAD
         #Excepcion en caso de que el archivo se encuentre vacío
         sg.Popup('Archivo reporte ".json" Vacio. No habra reporte para mostrar')
         return None
     else:
         fuente = ventana_elegir_fuente()
         return (fuente,dic)
+=======
+        #SI el Json estaba vacio
+        window.Close()
+        sg.Popup('Archivo reporte ".json" Vacio. No habra reporte para mostrar')
+        return None
+    else:
+        window.Close()
+        file.close()
+        return (values['fuente'],dic)
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5

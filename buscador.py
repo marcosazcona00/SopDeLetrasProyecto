@@ -64,9 +64,8 @@ class Buscador:
 
     def validacion(self,lista,dic):
         '''
-            se asume que toda palabra que no este en wikcionario y patter retorna que es sustantivo, sera una palabra invalida
+            Se asume que toda palabra que no este en wikcionario y pattern retorna que es sustantivo, será una palabra inválida
             Asumimos que si no es una palabra valida, pattern la devuelve como sustantivo
-
         '''
         tipoWikcionario = self.__verficar_palabra_wikcionario()
         tipoPattern = self.__verificar_palabra_patterEs()

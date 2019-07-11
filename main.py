@@ -7,10 +7,38 @@ import muestra_reporte
 import PySimpleGUI as sg
 from menu import menu_opciones
 from ingreso import main_ingreso
+<<<<<<< HEAD
 from metodos_verificadores import *
 from metodos_auxiliares_main import *
 
 # ---------  MODULOS  ---------------- #
+=======
+from metodos_auxiliares_main import *
+
+
+def sin_contenido_tipos():
+    '''
+        Verifica si el profesor ingreso o no palabras
+    '''
+    try:
+        file = open('tipos.json')
+        dic = json.load(file)
+        cant = 0
+        for i in dic:
+            if(dic[i] == []):
+                cant+=1
+        return (cant == 3)
+    except json.decoder.JSONDecodeError:
+        return True
+    #Si retorna que cant == 3 significa que había 3 listas vacias de tipos.
+    #Lo que quiere decir que no se cargaron datos en los tipos
+
+def pedir_palabras_profesor():
+    main_ingreso()
+    while(sin_contenido_tipos()):
+        sg.Popup('No se ingresaron palabras')
+        main_ingreso()
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 
 def elegir_oficina():
     '''
@@ -62,10 +90,15 @@ def pedir_palabras_profesor():
     '''
         Pide al profesor palabras. Si no hay palabras, vuelve a pedir hasta que se ingrese al menos una palabra.
     '''
+<<<<<<< HEAD
     main_ingreso()
     while(sin_contenido_tipos()):
         sg.Popup('No se ingresaron palabras')
         main_ingreso()
+=======
+    ##Menu que pide si quiere o no nuevas palabras
+    pedir_palabras_profesor()
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 
 def mostrar_grilla(orientacion,grilla,graph,mayus):
     '''
@@ -112,11 +145,19 @@ def main():
     muestra_reporte.mostrar_reporte()
     # ----------------------------------------- #
 
+<<<<<<< HEAD
 
     # ----------------------------------------- #
                 #Menu de opciones
     dic_color_cantPalabras,orientacion,mayus = menu_opciones()
     # ----------------------------------------- #
+=======
+    #Menu de opciones
+
+    dic_color_cantPalabras,orientacion,ayuda,mayus = menu_opciones()
+    #Devuelve la lista de palabras que estarán en la matriz
+    listaPalabras,dicTipoPalabra=selector.main_selector(dic_color_cantPalabras)  #recibe las listas de palabras y lista de palabras desordenadas
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 
 
     # ----------------------------------------- #

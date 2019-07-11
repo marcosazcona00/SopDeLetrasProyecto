@@ -2,7 +2,11 @@
 
 
 - Funcionamiento del programa:
+<<<<<<< HEAD
 
+=======
+  - El programa debe de ejecutarse desde el archivo main.py
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
   - Al principio de la ejecucion se le pide al profesor ingresar palabras para jugar. En caso de que no haya ingresado palabras, se le pedirá que vuelva a ingresar palabras
   - Cada palabra ingresada pasara por un proceso de validacion
   - Una vez que haya ingresado palabras, se mostrará un reporte de palabras que generaron conflicto entre Pattern y Wikcionario (si es que hubo palabras en conflicto. En caso contrario se mostrará que no habrá reporte).

@@ -76,6 +76,10 @@ class Matriz:
         return matriz
 
     def __crear_grilla_horizontal(self,graph,mayus):
+<<<<<<< HEAD
+=======
+        matriz = self.__distribuir_palabras()
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
         '''
         Distribuye las palabras por la grilla. METODO PRIVADO
         '''

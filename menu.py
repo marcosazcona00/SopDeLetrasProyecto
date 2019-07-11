@@ -2,9 +2,13 @@
 import os
 import json
 import collections
+<<<<<<< HEAD
 import PySimpleGUI as sg
 
 # ---------  MODULOS  ---------------- #
+=======
+
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 def devolver_cantidades_tipos():
     '''
         Devuelve la cantidad de palabras de cada tipo.
@@ -69,9 +73,15 @@ def agregar_color(dic,lista):
     '''
         Agrega los colores elegidos.
     '''
+<<<<<<< HEAD
     lista.insert(2,dic['color_Verbos'])
     lista.insert(0,dic['color_Sustantivos'])
     lista.insert(1,dic['color_Adjetivos'])
+=======
+    lista.insert(0,dic['color_Verbos'])
+    lista.insert(1,dic['color_Sustantivos'])
+    lista.insert(2,dic['color_Adjetivos'])
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
 
 def verificar_color_repetido(lista):
     '''
@@ -112,6 +122,16 @@ def verificar_cantidades(dic):
         return True
 
 def menu_opciones():
+<<<<<<< HEAD
+=======
+    def verificar_cantidades(dic):
+        print(dic)
+        if((dic['cantidad_sustantivo'] == '0')and(dic['cantidad_adjetivo'] == '0')and(dic['cantidad_verbo'] == '0')):
+            sg.Popup('Elija por lo menos una palabra para un tipo')
+            return False
+        else:
+            return True
+>>>>>>> efe5b110265e0a13a8487c22e8a2dc58b600afd5
     '''
         Menu de Opciones
     '''
