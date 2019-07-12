@@ -43,6 +43,7 @@ class Registro:
             event,values = window.Read()
             if(event == 'Enviar' and values[0] != ''):
                 self.set_oficina(values[0])
+                window.Close()
                 break
             if(event != 'Enviar' or values[0] == ''):
                 event = sg.Popup('Ingrese el nombre de una oficina',auto_close=True,auto_close_duration=2)
@@ -62,7 +63,7 @@ class Registro:
             event = sg.PopupYesNo('Terminar')
             if(event == 'Yes'):
                 break
-            time.sleep(2) #Espera 60 segundos para volver a iterar
+            time.sleep(60) #Espera 60 segundos para volver a iterar
         file = open('datos-oficina.json','w')
         json.dump(self.__dic,file)
         file.close()

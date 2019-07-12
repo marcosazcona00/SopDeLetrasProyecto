@@ -116,7 +116,7 @@ def menu_opciones():
         Menu de Opciones
     '''
     layout = generar_layout()
-    window=sg.Window('ventana').Layout(layout)
+    window=sg.Window('Menu').Layout(layout)
     dic_color_cantPalabras = {'Sustantivo': [],'Adjetivo':[],'Verbo':[]}
     while True:
         button,values=window.Read()

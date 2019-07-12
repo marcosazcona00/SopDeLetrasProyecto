@@ -50,7 +50,7 @@ def screen(orientacion,colores_mostrar,tamX,tamY,dic_color_cantPalabras):
              [sg.Graph(canvas_size = (tamY,tamX),graph_bottom_left=(0,tamX), graph_top_right=(tamY,0),enable_events = True,key = 'graph')],
              [sg.Submit('Terminar')]
              ]
-    window = sg.Window('Ventana').Layout(layout)
+    window = sg.Window('Sopa').Layout(layout)
     window.Finalize()
     graph = window.FindElement('graph')
 
