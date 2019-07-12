@@ -1,3 +1,4 @@
+#@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
 import time
 import PySimpleGUI as sg
 from sonido import Sonido
