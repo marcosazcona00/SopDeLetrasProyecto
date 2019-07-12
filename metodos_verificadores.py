@@ -33,7 +33,6 @@ def verificar_diferencias(listaOrdenada):
             if((listaOrdenada[i] - listaOrdenada[i-1] ) == 1):   #como arranca en 1  verifico el actual con el anterior
                 listaAuxiliar.append(listaOrdenada[i-1])
                 pos = i
-            #Si la diferencia no dio 1, entonces al reporte
             elif (listaAuxiliar != []):  #si la lista no esta vacia entonces la diferencia se produce al final por lo que las letras despues de esta no seran validas
                 break
         listaAuxiliar.append(listaOrdenada[pos])
