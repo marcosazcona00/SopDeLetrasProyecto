@@ -28,7 +28,7 @@ def verificar_diferencias(listaOrdenada):
     '''
     listaAuxiliar = list()
     pos = 0
-    if(listaOrdenada != []):
+    if(listaOrdenada != []): #Preguntamos si no está vacía porque pudo haber pasado que se hayan deseleccionador filas/columnas y quede una lista vacía
         for i in range(1,len(listaOrdenada)):
             if((listaOrdenada[i] - listaOrdenada[i-1] ) == 1):   #como arranca en 1  verifico el actual con el anterior
                 listaAuxiliar.append(listaOrdenada[i-1])
@@ -46,10 +46,11 @@ def verificar_grilla(dicGeneral,dic,dicTipoPalabra,orientacion,dicAux):
         con dicTipoPalabra que es un diccionario con Llave color y valor lista de palabras seleccionadas para el color.
     '''
     palabrasAcertadas = []
-    for i in dicGeneral: #i es el color de tipo sustantivo, adjetivo o verbo
-        dicFilas = dicGeneral[i] #dicFilas es el diccionario con las claves que son las filas elegidas
+    print('Diccionario General ',dicGeneral)
+    for i in dicGeneral: #i es el color de tipo en hexadecimal sustantivo, adjetivo o verbo
+        dicFilas = dicGeneral[i] #dicFilas es el diccionario con clave fila/columna y valor lista de filas/columnas elegidas
         for fila in dicFilas:
-            listaColumnas = dicGeneral[i][fila] #Me quedo con las columnas elegidas de esa fila
+            listaColumnas = dicGeneral[i][fila] #Me quedo con las columnas elegidas de esa fila, o las filas de la columna.
             listaOrdenada = sorted(listaColumnas,key = lambda x: x) #Ordeno las columnas de menor a mayor
             palabra=''
             listaAuxiliar = verificar_diferencias(listaOrdenada) #Verifico si las diferencias entre las columnas son de 1.
@@ -59,8 +60,8 @@ def verificar_grilla(dicGeneral,dic,dicTipoPalabra,orientacion,dicAux):
                 else:
                     letra = dic[(n,fila)].get_letra()
                 palabra = palabra + letra
-            print('Diccionario ',dicTipoPalabra[i])
-            if(palabra.lower() in dicTipoPalabra[i]): #dicAux[i][0] es el color en hexadecimal, porque i es el tipo Sustantivo, adjetivo o verbo
+            print('Diccionario Tipo Palabra ',dicTipoPalabra[i])
+            if(palabra.lower() in dicTipoPalabra[i]): #dicTipoPalabra diccionario {Color_en_Hexadecimal: [lista de palabras del color (tipo)]}
                 palabrasAcertadas.append(palabra.lower())
     return palabrasAcertadas
 

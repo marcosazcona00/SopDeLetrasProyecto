@@ -1,3 +1,4 @@
+#@Autores: Azcona Marcos -> Alvarez Cristian Gabriel
 import RPi.GPIO as GPIO
 
 class Sonido:

@@ -78,26 +78,20 @@ class Buscador:
                     if(self.__tipo in self.__dic.values()): #Si son distintios pero el tipo Wikcionario es un Sustantivo Adjetivo o Verbo
                         self.__razon = self.__obtener(self.__objeto_buscador.sections[3].string)
                         self.__generar_reporte('definicion.json')
-                    if(tipoWikcionario != tipoPattern):
-                        #Si wikcionario y pattern no coincidiero
+                    if(tipoWikcionario != tipoPattern): #Si wikcionario y pattern no coincidiero
                         self.__razon = 'No coincidio con pattern'
-            else:
-                #No estaba en wikcionarios
-                if(tipoPattern != 'sustantivo'):
-                    ##Si pattern me devuelve un tipo válido
+            else: #No estaba en wikcionarios
+                if(tipoPattern != 'sustantivo'): ##Si pattern me devuelve un tipo válido
                     self.__tipo = tipoPattern
                     self.__razon = sg.PopupGetText('Ingrese la defincion de la palabra ',self.__palabra)
                     self.__generar_reporte('definicion.json')
                     self.__razon='No estaba en wikcionario'
-                    #self.__generar_reporte('reporte.json')
-                else:
-                    #No estaba en patter ni wikcionario
+                else: #No estaba en patter ni wikcionario
                     self.__razon = 'No estaba en pattern ni wikcionario'
                     self.__tipo = None
                 self.__generar_reporte('reporte.json')
             return (self.__tipo,False)
-        else:
-            #Si está repetida, buscamos el tipo
+        else: #Si está repetida, buscamos el tipo
             for i in dic:
                 if(self.__palabra in dic[i]):
                     self.__tipo = i #Me quedó con el tipo de la Palabra

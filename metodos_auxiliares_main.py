@@ -77,7 +77,6 @@ def mostrar_resultado(lista,palabrasAcertadas):
             [sg.Listbox(palabrasAcertadas, size = (12,6))]
             ]
     if(lista == []):
-    #    sg.Popup('Felicitaciones, completaste la Sopa de Letras!')
         juego_completado = [sg.Image(filename= 'premio.png')],[sg.T(' ')]
         window_completado = sg.Window('Felicitaciones').Layout(juego_completado)
         window_completado.Read()

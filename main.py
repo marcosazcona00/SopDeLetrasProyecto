@@ -76,15 +76,15 @@ def mostrar_grilla(orientacion,grilla,graph,mayus):
     else:
         dic = grilla.mostrar_matriz_vertical(graph,mayus)
     return dic
-# ----------------------------------------- #
 
 def resultados_juego(listaPalabras,palabrasAcertadas):
     '''
-        Muestra los resultados del juego
+    Muestra los resultados del juego
     '''
     palabras_acertadas(listaPalabras,palabrasAcertadas)
     mostrar_resultado(listaPalabras,palabrasAcertadas)
 
+# ----------------------------------------- #
 
 def main():
     '''
