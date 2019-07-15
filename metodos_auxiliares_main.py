@@ -87,6 +87,9 @@ def mostrar_resultado(lista,palabrasAcertadas):
     window.Read()
 
 def ventana_ayuda(columna):
+    '''
+        Dibuja la ventana con la ayuda solicitada.
+    '''
     layout = [
                 [sg.Column(columna,background_color='#dbdbdb')],
                 [sg.Submit('Cerrar')]

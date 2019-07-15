@@ -14,8 +14,6 @@ class Buscador:
         self.__objeto_buscador = None
         self.__dic = {'JJ':'adjetivo','VB':'verbo','NN':'sustantivo'}
 
-    def get_tipo(self):
-        return self.__tipo
 
     def __verficar_palabra_wikcionario(self):
         '''
@@ -43,8 +41,6 @@ class Buscador:
         finally:
             return tipo
 
-    def get_defincion(self):
-        return self.__razon
 
     def __generar_reporte(self,archivo):
         '''
@@ -64,8 +60,7 @@ class Buscador:
 
     def validacion(self,lista,dic):
         '''
-            se asume que toda palabra que no este en wikcionario y patter retorna que es sustantivo, sera una palabra invalida
-            Asumimos que si no es una palabra valida, pattern la devuelve como sustantivo
+            Se evalúa el tipo de la palabra entre Pattern y Wikcionario. En caso de conflicto, se genera el correspondiente reporte
 
         '''
         tipoWikcionario = self.__verficar_palabra_wikcionario()
@@ -101,7 +96,7 @@ class Buscador:
 
     def __separar_defincion(self,definicion):
         '''
-        Separa la definicion hasta encontrar un punto
+            Separa la definicion hasta encontrar un punto
         '''
         cadena = ''
         for i in range(len(definicion)):

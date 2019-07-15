@@ -41,8 +41,7 @@ def verificar_diferencias(listaOrdenada):
 def verificar_grilla(dicGeneral,dic,dicTipoPalabra,orientacion,dicAux):
     '''
         Verifica si la palara es valida
-        Recorre el dicionario de colores, elige cada palabra de cada color, concatena sus letras y verifica si es valida, comparando
-        con dicTipoPalabra que es un diccionario con Llave color y valor lista de palabras seleccionadas para el color.
+        Recorre el dicionario de colores, elige cada palabra de cada color, concatena sus letras y verifica si es valida, comparando con dicTipoPalabra que es un diccionario con Llave color y valor lista de palabras seleccionadas para el color.
     '''
     palabrasAcertadas = []
     print('Diccionario General ',dicGeneral)

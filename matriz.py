@@ -27,7 +27,7 @@ class Matriz:
         '''
         self.__tam = self.__tamaño_mayor() + 4 #El tamaño de la palabra + 4 lugares más
         if(len(self.__palabras) < 8): #Si la longitud de la palabra es mas de 8, el tamaño es el de la cantidad de palabras
-            self.__tamano_real = (len(self.__palabras) + (8 - len(self.__palabras)))  #Si la longitud de palabras es menor a 8, el tamaño maximo va a ser 8, que se define
+            self.__tamano_real = 8  #Si la longitud de palabras es menor a 8, el tamaño maximo va a ser 8
         else:
             self.__tamano_real = len(self.__palabras)
         self.__altura = self.__tamano_real * 25;
@@ -69,7 +69,7 @@ class Matriz:
             for j in range((columna + len(self.__palabras[fila])),self.__tam): #Desde la ultima posicion en que está la ultima letra de la palabra + 1 completa con letras al azar hasta el tamaño de la grilla
                 letra_azar = chr(random.randint(97,122))
                 matriz[filasElegir].append(letra_azar)
-        for fila in range(len(self.__palabras),(self.__tamano_real)):##Llena las filas que quedaron de las matriz con letras al azar
+        for fila in range(len(self.__palabras),(self.__tamano_real)):#Llena las filas que quedaron de las matriz con letras al azar
             filasElegir = self.__elegir_fila(filas_elegidas)
             for i in range(self.__tam):
                 matriz[filasElegir].append(chr(random.randint(97,122)))
@@ -77,16 +77,16 @@ class Matriz:
 
     def __crear_grilla_horizontal(self,graph,mayus):
         '''
-        Distribuye las palabras por la grilla. METODO PRIVADO
+            Distribuye las palabras por la grilla. METODO PRIVADO
         '''
 
         matriz = self.__distribuir_palabras()
         y1 = 0
         y2 = 25
-        for z in range(len(matriz)):    #cantidad de filas de la matriz
+        for z in range(len(matriz)): #cantidad de filas
             _x1 = 0
             x2 = 25
-            for n in range(len(matriz[z])):     #cantidad de columnas
+            for n in range(len(matriz[z])): #cantidad de columnas
                 pos_sup = (_x1,y1)
                 pos_inf = (x2,y2)
                 cell = Celda()
@@ -104,17 +104,16 @@ class Matriz:
             y2+=25
 
     def __crear_grilla_vertical(self,graph,mayus):
-
+        '''
+            Distribuye las palabras por la grilla. METODO PRIVADO
+        '''
         matriz = self.__distribuir_palabras()
-        '''
-         Distribuye las palabras por la grilla. METODO PRIVADO
-        '''
         _x1 = 0
         x2 = 25
-        for z in range(len(matriz)):    #cantidad de filas de la matriz
+        for z in range(len(matriz)): #cantidad de columnas
             y1 = 0
             y2 = 25
-            for n in range(len(matriz[z])):     #cantidad de columnas
+            for n in range(len(matriz[z])): #cantidad de filas
                 pos_sup = (_x1,y1)
                 pos_inf = (x2,y2)
                 cell = Celda()
@@ -134,7 +133,7 @@ class Matriz:
 
     def mostrar_matriz_vertical(self,graph,mayus):
         '''
-            MUESTRA LA GRILLA POR PANTALLA VERTICALMENTE
+            Muestr la grilla verticalmente
         '''
         self.__crear_grilla_vertical(graph,mayus)
         return self.__dic
@@ -142,13 +141,13 @@ class Matriz:
 
     def mostrar_matriz_horizontal(self,graph,mayus):
         '''
-            MUESTRA LA GRILLA POR PANTALLA VERTICALMENTE
+            Muestra la grilla horizontalmente
         '''
         self.__crear_grilla_horizontal(graph,mayus)
         return self.__dic
 
 
-    def cambiar(self,pos,graph,color = 'red'):
+    def cambiar(self,pos,graph,color):
         '''
             Cambia el color de la celda seleccionada.
         '''

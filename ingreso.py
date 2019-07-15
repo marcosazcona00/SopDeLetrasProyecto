@@ -32,7 +32,6 @@ def eliminar_palabra(palabra,archivo):
         Elimina la palabra del archivo
     '''
     try:
-        print('Entre')
         file = open(archivo,'r')
         dic = json.load(file)
         file.close()
@@ -47,34 +46,34 @@ def eliminar_palabra(palabra,archivo):
 def verificar():
     '''
         Verifica si quiere o no ingresar nuevas palabras.
-        La primer vez que se ejecute se pedirán palabras obligatoriamente
+        La primera vez que se ejecute se pedirán palabras obligatoriamente
     '''
-    aux = False
+    nuevas_palabras = False
     dic = {"Verbo": [], "Sustantivo": [], "Adjetivo": []}
     file = None
     if (os.stat('tipos.json').st_size == 0):
         #Si el archivo está vacio, lo creo y agrego palabras
         file = open('tipos.json','w',encoding = 'utf-8')
-        aux = True
+        nuevas_palabras = True
     else:
         ok = sg.PopupYesNo('¿ Desea agregar nuevas palabras para jugar o eliminar alguna palabra cargada ?')
         #Si no está vacio pregunto si quiere agregar nuevas
         if(ok == 'Yes'):
             #Si desea agregar,abrimos el archivo como lectura escritura
             file = open('tipos.json','r',encoding = 'utf-8')
-            aux = True
+            nuevas_palabras = True
             dic = json.load(file)
         elif(ok != 'No'):
             #Si no selecciono el boton de Si ni No es porque apretó la X de salir
             os._exit(1)
-    return (aux,dic,file)
+    return (nuevas_palabras,dic,file)
 
 
 def agregar_palabras(file,dic,window,lista):
     '''
-    Agrega las nuevas palabras al archivo
-    En caso de existir alguna, permite la opcion de borrarla
-    Si no existe, pide una defincion y se la guarda en definicion.json
+        Agrega las nuevas palabras al archivo
+        En caso de existir alguna, permite la opcion de borrarla
+        Si no existe, pide una defincion y se la guarda en definicion.json
     '''
     lAux = ['Sustantivo','Adjetivo','Verbo']
     while True:
@@ -118,7 +117,7 @@ def agregar_palabras(file,dic,window,lista):
 
 def main_ingreso():
     '''
-    Pide al profesor el ingreso de las palabras y escribe en reporte las palabras que no coincidieron
+        Pide al profesor el ingreso de las palabras y escribe en reporte las palabras que no coincidieron
     '''
 
     # --------------------- Main Ingreso ------------------------- #
