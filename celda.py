@@ -27,9 +27,6 @@ class Celda:
             ok = True
         return ok
 
-    def get_coordenada(self):
-        return (self.__coordenada[0],self.__coordenada[1])
-
     def get_letra(self):
         return self.__letra
 
