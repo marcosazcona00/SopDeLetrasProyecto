@@ -13,8 +13,7 @@ def mostrar_palabras_ya_existentes(dic):
     '''
     lista = []
     for i in dic:
-        for j in dic[i]:
-            lista.append(j)
+        lista+=dic[i]
     return lista
 
 
