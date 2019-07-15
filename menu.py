@@ -89,7 +89,7 @@ def verificar_color_repetido(lista):
     ##color = A
     ##listaN = [B,A]
     ##color repetido, sale con ok = True porque coincidieron
-    listaTipos = ['Verbo','Sustantivo','Adjetivo']
+    listaTipos = ['Sustantivo','Adjetivo','Verbo']
     ok = False #Si sale con false significa que no hubo colores repetidos
     for i in range(len(lista)-1):
         color = lista[i]
