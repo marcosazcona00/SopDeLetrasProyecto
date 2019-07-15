@@ -37,10 +37,10 @@ def elegir_oficina():
             else:
                 look = 'Purple'
             window.Close()
-        return look
     except json.decoder.JSONDecodeError:  #Si no hay datos de oficinas en el archivo
+        print('Archivo vacío')
+    finally:
         return look
-
 
 def sin_contenido_tipos():
     '''
