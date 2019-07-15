@@ -9,7 +9,6 @@ class Buscador:
     def __init__(self,palabra):
         self.__razon = ''
         self.__tipo = None
-        self.__definicion = ''
         self.__palabra = palabra
         self.__objeto_buscador = None
         self.__dic = {'JJ':'adjetivo','VB':'verbo','NN':'sustantivo'}
@@ -80,6 +79,7 @@ class Buscador:
                         self.__generar_reporte('definicion.json')
                     if(tipoWikcionario != tipoPattern): #Si wikcionario y pattern no coincidiero
                         self.__razon = 'No coincidio con pattern'
+                        self.__generar_reporte('reporte.json')
             else: #No estaba en wikcionarios
                 if(tipoPattern != 'sustantivo'): ##Si pattern me devuelve un tipo válido
                     self.__tipo = tipoPattern

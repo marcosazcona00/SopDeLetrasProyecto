@@ -94,8 +94,6 @@ def agregar_palabras(file,dic,window,lista):
                                 #Si la palabra no está en el tipo, la agrego
                                 dic[tipo].append(palabra)
                                 lista.append(palabra)
-                            else:
-                                sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
                         else:
                             sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
                     #Si retorno None, puede pasar que haya sido la primera vez y quiera borrar
@@ -119,7 +117,7 @@ def agregar_palabras(file,dic,window,lista):
         except TypeError:
             break
 
-            
+
 def main_ingreso():
     '''
     Pide al profesor el ingreso de las palabras y escribe en reporte las palabras que no coincidieron

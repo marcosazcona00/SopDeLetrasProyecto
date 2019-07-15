@@ -35,7 +35,7 @@ def verificar_diferencias(listaOrdenada):
                 pos = i
             elif (listaAuxiliar != []):  #si la lista no esta vacia entonces la diferencia se produce al final por lo que las letras despues de esta no seran validas
                 break
-        listaAuxiliar.append(listaOrdenada[pos])
+        listaAuxiliar.append(listaOrdenada[pos])   #agrega el ultimo que falta
     return listaAuxiliar
 
 def verificar_grilla(dicGeneral,dic,dicTipoPalabra,orientacion,dicAux):
@@ -53,7 +53,7 @@ def verificar_grilla(dicGeneral,dic,dicTipoPalabra,orientacion,dicAux):
             listaOrdenada = sorted(listaColumnas,key = lambda x: x) #Ordeno las columnas de menor a mayor
             palabra=''
             listaAuxiliar = verificar_diferencias(listaOrdenada) #Verifico si las diferencias entre las columnas son de 1.
-            for n in listaAuxiliar:
+            for n in listaAuxiliar:  #forma la palabra
                 if(orientacion =='Horizontal'):
                     letra = dic[(fila,n)].get_letra()
                 else:

@@ -17,7 +17,7 @@ class Matriz:
         '''
         alto=0
         for i in self.__palabras:
-            if(len(i)>alto):
+            if(len(i)>alto): #SI la longitud de la palabra evaluada es mayor a una previamente evaluada.
                 alto=len(i)
         return alto
 
@@ -81,8 +81,6 @@ class Matriz:
         '''
 
         matriz = self.__distribuir_palabras()
-        dic = dict()
-        dicAux = dict()
         y1 = 0
         y2 = 25
         for z in range(len(matriz)):    #cantidad de filas de la matriz
@@ -111,7 +109,6 @@ class Matriz:
         '''
          Distribuye las palabras por la grilla. METODO PRIVADO
         '''
-        dic = dict()
         _x1 = 0
         x2 = 25
         for z in range(len(matriz)):    #cantidad de filas de la matriz
@@ -152,6 +149,9 @@ class Matriz:
 
 
     def cambiar(self,pos,graph,color = 'red'):
+        '''
+            Cambia el color de la celda seleccionada.
+        '''
         celda = self.__dic[(pos[0],pos[1])]
         ok=celda.set_color(color)
         celda.draw_cell(graph)
