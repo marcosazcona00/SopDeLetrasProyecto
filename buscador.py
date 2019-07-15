@@ -2,6 +2,7 @@
 import os
 import json
 import PySimpleGUI as sg
+import pattern
 from pattern.es import tag
 from pattern.web import Wiktionary,SEARCH
 
@@ -21,16 +22,13 @@ class Buscador:
             Verifica si la palabra existe en wikcionario y devuelve su tipo
         '''
         buscador = Wiktionary(language = 'es')
-        self.__objeto_buscador = buscador.search(self.__palabra,type = SEARCH)
         try:
-            ##objeto_buscador es de tipo WiktionaryArticle
+            self.__objeto_buscador = buscador.search(self.__palabra,type = SEARCH)
             self.__tipo =  self.__objeto_buscador.sections[3].title.split()[0].lower()
-        except (AttributeError,IndexError):
-            ##Hacer reporte de que no estaba en wikcionario
-            sg.Popup('error')
-            return None
+        except (AttributeError,IndexError,pattern.web.URLError):
+            print('Error')
         else:
-            sg.Popup(self.__tipo)
+            sg.Popup(self.__tipo,auto_close=True,auto_close_duration=1)
         return self.__tipo
 
     def __verificar_palabra_patterEs(self):

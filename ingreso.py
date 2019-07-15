@@ -5,6 +5,8 @@ import json
 import PySimpleGUI as sg
 from buscador import Buscador
 
+# ---------  MODULOS  ---------------- #
+
 def mostrar_palabras_ya_existentes(dic):
     '''
         Retorna una lista de las palabras que ya habian sido cargadas
@@ -88,17 +90,15 @@ def agregar_palabras(file,dic,window,lista):
                     (tipo,repetida) = searcher.validacion(lista,dic)
                     if(tipo != None): #Si está en wikcionario
                         tipo = tipo.capitalize() #Ponemos la primer letra mayuscula pues el diccionario sus claves tiene la primer letra Mayuscula
-                        if(tipo in lAux):
-                            #Si estaba en la lista de tipos
+                        if(tipo in lAux): #Si estaba en la lista de tipos
                             if(palabra not in dic[tipo]):
                                 #Si la palabra no está en el tipo, la agrego
                                 dic[tipo].append(palabra)
                                 lista.append(palabra)
-                        else:
-                            sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras')
-                    #Si retorno None, puede pasar que haya sido la primera vez y quiera borrar
-                    if(repetida):
-                        sg.Popup('Palabra ya existente')
+                    else:
+                        sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras',auto_close=True,auto_close_duration=1)
+                    if(repetida): #Si retorno None, puede pasar que haya sido la primera vez y quiera borrar
+                        sg.Popup('Palabra ya existente',auto_close=True,auto_close_duration=1)
                         ok = sg.PopupYesNo('¿ Desea eliminar la palabra {} ?'.format(palabra))
                         if(ok == 'Yes'):
                             dic[tipo].remove(palabra)
@@ -124,6 +124,7 @@ def main_ingreso():
     '''
 
     # --------------------- Main Ingreso ------------------------- #
+
     nuevas_palabras,dic,file = verificar()
     if(nuevas_palabras):   #Solo se ejecutará si se desea agregar mas palabras o si no habia palabras cargadas
         file.close() #Cerramos el archivo si decide elegir nuevas palabras
@@ -138,3 +139,5 @@ def main_ingreso():
 
         window = sg.Window('Ingreso de palabras',size = (450,300)).Layout(layout)
         agregar_palabras(file,dic,window,lista)
+
+# ------------------------------------- #
