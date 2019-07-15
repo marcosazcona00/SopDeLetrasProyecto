@@ -10,8 +10,7 @@
     --> Cantidad de palabras que se mostrarán para cada tipo
     --> Colores para cada tipo
     --> Orientacion del juego: Verticual u Horizontal
-    --> Tipo de Ayuda. Si el tipo de ayuda elegido es Ninguno, se mostrarán las cantidades dispersas de palabras para cada tipo.
-                       En caso de que no hubiese definciones, se le indicará con una ventana que no habrá definiciones disponibles
+
   - Si los colores se repiten, se le informará en que tipos se han repetido y se pedirá que ingrese nuevos colores.
   - Si para TODOS los tipos se seleccionan 0 cantidades, se le pedirá que, para almenos un tipo, se ingrese 1 o más palabras
 
@@ -21,11 +20,8 @@
   Ventana de juego:
     --> Al iniciar el juego, al alumno se le mostrará una barra de selección donde podrá seleccionar el tipo de palabra que desea marcar,
       por tanto al tocar sobre una celda, se mostrará la misma coloreada con el color que haya elegido para ese tipo en el menu de configuración de la sopa de letras.
-
+    --> Tipo de Ayuda: Se le darán 3 tipos de ayuda. Cantidad de Palabras para cada tipo, Lista de Definiciones de las palabras correspondientes, Lista De Palabras a Descubrir
     --> Debajo, se mostrará la grilla con las palabras distribuidas.
-
-    --> Del lado derecho de la grilla, se mostrará la ayuda que se haya elegido en el menu de configuración.
-
 
                                   ------------------ ° --------------------
 
@@ -38,7 +34,7 @@
                                   ------------------ ° --------------------
 
   Informacion de la sopa de letras:
-    ---> La distribución de palabras es al azar.
+    --> La distribución de palabras es al azar.
     --> Se seleccionaran palabras de forma aleatoria de acuerdo a la cantidad deseada, y que estén disponibles para cada tipo de palabra.
     --> Si la cantidad total de palabras elegidas entre los tipos es menor a 8, la grilla poseerá un tamaño máximo de 8 por la longitud de la palabra más larga de las elegidas, caso contrario, la grilla poseerá el tamaño correspondiente al tamaño de la palabra más grande y la cantidad de palabras elegidas
 
