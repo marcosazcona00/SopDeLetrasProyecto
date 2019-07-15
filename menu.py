@@ -69,9 +69,9 @@ def agregar_color(dic,lista):
     '''
         Agrega los colores elegidos.
     '''
-    lista.insert(2,dic['color_Verbos'])
     lista.insert(0,dic['color_Sustantivos'])
     lista.insert(1,dic['color_Adjetivos'])
+    lista.insert(2,dic['color_Verbos'])
 
 def verificar_color_repetido(lista):
     '''
