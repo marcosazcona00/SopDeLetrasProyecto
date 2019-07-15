@@ -35,10 +35,13 @@ class Buscador:
         '''
             Devuelve el tipo de la palabra de Pattern.es
         '''
+        tipo = ' '
         try:
-            return self.__dic[tag(self.__palabra)[0][1]]
+            tipo =  self.__dic[tag(self.__palabra)[0][1]]
         except (IndexError,KeyError):
-            return ' '
+            print('Error con pattern')
+        finally:
+            return tipo
 
     def get_defincion(self):
         return self.__razon
