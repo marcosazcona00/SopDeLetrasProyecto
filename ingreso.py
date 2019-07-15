@@ -97,8 +97,7 @@ def agregar_palabras(file,dic,window,lista):
                     else:
                         sg.Popup('La palabra ingresada no es correcta, por tanto no será incluida en la sopa de letras',auto_close=True,auto_close_duration=1)
                     if(repetida): #Si retorno None, puede pasar que haya sido la primera vez y quiera borrar
-                        sg.Popup('Palabra ya existente',auto_close=True,auto_close_duration=1)
-                        ok = sg.PopupYesNo('¿ Desea eliminar la palabra {} ?'.format(palabra))
+                        ok = sg.PopupYesNo('Palabra ya existe, ¿Desea eliminar la palabra {} ?'.format(palabra))
                         if(ok == 'Yes'):
                             dic[tipo].remove(palabra)
                             lista.remove(palabra)
