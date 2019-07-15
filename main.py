@@ -44,8 +44,9 @@ def elegir_oficina():
 
 def sin_contenido_tipos():
     '''
-        Verifica si el profesor ingreso o no palabras
+        Verifica si el profesor ingresó o no palabras
     '''
+    tipos_vacios = True #Será True si los 3 tipos están vacíos.
     try:
         file = open('tipos.json')
         dic = json.load(file)
@@ -53,11 +54,12 @@ def sin_contenido_tipos():
         for i in dic:
             if(dic[i] == []):
                 cant+=1
-        return (cant == 3)
-        #Si retorna que cant == 3 significa que había 3 listas vacias de tipos.
-        #Lo que quiere decir que no se cargaron datos en los tipos
     except json.decoder.JSONDecodeError:
-        return True
+        print('Archivo Vacio')
+    finally:
+        if(cant != 3): #Si se ingresó una palabra de almenos un tipo
+            tipos_vacios = False
+        return tipos_vacios
 
 def pedir_palabras_profesor():
     '''
