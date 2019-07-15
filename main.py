@@ -38,7 +38,7 @@ def elegir_oficina():
                 look = 'Purple'
             window.Close()
         return look
-    except (json.decoder.JSONDecodeError,KeyError):  #Si no hay datos de oficinas en el archivo
+    except json.decoder.JSONDecodeError:  #Si no hay datos de oficinas en el archivo
         return look
 
 
